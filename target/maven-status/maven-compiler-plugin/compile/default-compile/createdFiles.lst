@@ -1,4 +1,5 @@
 com\cookiefinder\App.class
 com\cookiefinder\model\Cookie.class
+com\cookiefinder\service\BinarySearchCookieFinder.class
 com\cookiefinder\service\CookieLogReader.class
 com\cookiefinder\service\CookieAnalyticsService.class

@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.cookiefinder.model.Cookie;
+import com.cookiefinder.service.BinarySearchCookieFinder;
 import com.cookiefinder.service.CookieAnalyticsService;
 import com.cookiefinder.service.CookieLogReader;
 
@@ -28,13 +29,15 @@ public class App implements Runnable {
 
     private final CookieLogReader logReader = new CookieLogReader();
     private final CookieAnalyticsService analyticsService = new CookieAnalyticsService();
+    private final BinarySearchCookieFinder binarySearchCookieFinder = new BinarySearchCookieFinder();
 
     @Override
     public void run() {
          
         try {
             LocalDate targetDate = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
-            List<Cookie> cookies = logReader.readLog(filePath);
+            // List<Cookie> cookies = logReader.readLog(filePath);
+            List<Cookie> cookies = binarySearchCookieFinder.findAllMatchCookies(filePath,targetDate);
             List<Cookie> mostActiveCookies = analyticsService.findMostActiveCookies(cookies, targetDate);
 
             if (mostActiveCookies.isEmpty()) {
